@@ -5,7 +5,7 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.7">
-      <projectUrl>https://github.com/Wakemakin/faro-api/</projectUrl>
+      <projectUrl>git@github.com/Wakemakin/faro-api.git/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@1.4.0">
