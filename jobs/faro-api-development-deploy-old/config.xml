@@ -46,7 +46,7 @@
     <scmName></scmName>
   </scm>
   <canRoam>true</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
@@ -54,43 +54,31 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
+if [ -d &quot;deploy_tools&quot; ]; then
+  rm -rf deploy_tools
+fi
+git clone git@wakemakin-ci.github.com/Wakemakin/wakemakin-ci.git deploy_tools</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
 if [ -d &quot;.venv&quot; ]; then
   rm -rf .venv
 fi
 virtualenv --prompt=&apos;(faro-api)&apos; --distribute --no-site-packages .venv
-if [ $? -ne 0 ]; then
-  echo &quot;Error creating virtualenv&quot;
-  exit 1
-fi
 source .venv/bin/activate
 pip install -r pip-requirements.txt
-if [ $? -ne 0 ]; then
-  echo &quot;Error pip install pip-requirements.txt&quot;
-  exit 1
-fi
 pip install -r test-requirements.txt
-if [ $? -ne 0 ]; then
-  echo &quot;Error pip install test-requirements.txt&quot;
-  exit 1
-fi
 pip install tox
-if [ ! -d &quot;/var/deploys/faro-api&quot; ]; then
-  mkdir -p /var/deploys/faro-api
-fi
 fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER\
     --deb-compression bzip2 --inputs MANIFEST\
-    -p /var/deploys/NAME/NAME_FULLVERSION_ARCH.TYPE\
+    -p /var/deploys/NAME_FULLVERSION_ARCH.TYPE\
     --vendor &quot;Wakemakin Development House L.L.C&quot;\
     -d python-dev -d python-virtualenv\
-    -d libmysqlclient-dev\
     --url &quot;https://github.com/Wakemakin/faro-api&quot; --prefix /opt/faro/faro-api
 if [ $? -ne 0 ]; then
   echo &quot;Error creating deb&quot;
   exit 1
-fi
-if [ -e &quot;/var/deploys/faro-api/latest&quot; ]; then
-  rm /var/deploys/faro-api/latest
-fi </command>
+fi</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
