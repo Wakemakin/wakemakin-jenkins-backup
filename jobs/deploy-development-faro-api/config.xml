@@ -54,7 +54,6 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-#!/bin/bash
 virtualenv --prompt=&apos;(faro-api)&apos; --distribute --no-site-packages .venv
 source .venv/bin/activate
 pip install -r pip-requirements.txt
