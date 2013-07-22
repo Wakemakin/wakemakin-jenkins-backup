@@ -52,23 +52,16 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <jenkins.plugins.shiningpanda.builders.VirtualenvBuilder plugin="shiningpanda@0.20">
-      <pythonName>System-CPython-2.7</pythonName>
-      <home></home>
-      <clear>true</clear>
-      <useDistribute>true</useDistribute>
-      <systemSitePackages>false</systemSitePackages>
-      <nature>shell</nature>
+    <hudson.tasks.Shell>
       <command>#!/bin/bash
+if [ -d &quot;.venv&quot; ]; then
+  rm -rf .venv
+fi
 virtualenv --prompt=&apos;(faro-api)&apos; --distribute --no-site-packages .venv
 source .venv/bin/activate
 pip install -r pip-requirements.txt
 pip install -r test-requirements.txt
-pip install tox</command>
-      <ignoreExitCode>false</ignoreExitCode>
-    </jenkins.plugins.shiningpanda.builders.VirtualenvBuilder>
-    <hudson.tasks.Shell>
-      <command>#!/bin/bash
+pip install tox
 fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER --deb-compression bzip2 --inputs MANIFEST -p /var/deploys/NAME_FULLVERSION_ARCH.TYPE
 if [ $? -ne 0 ]; then
   echo &quot;Error creating deb&quot;
