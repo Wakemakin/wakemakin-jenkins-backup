@@ -54,7 +54,7 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER --deb-compression bzip2 --inputs faro-api/MANIFEST -C faro-api
+fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER --deb-compression bzip2 --inputs MANIFEST -C faro-api
 if [ $? -ne 0 ]; then
   echo &quot;Error creating deb&quot;
   exit 1
