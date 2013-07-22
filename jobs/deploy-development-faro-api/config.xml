@@ -16,11 +16,6 @@
         <refspec></refspec>
         <url>ssh://git@faro-api.github.com/Wakemakin/faro-api.git</url>
       </hudson.plugins.git.UserRemoteConfig>
-      <hudson.plugins.git.UserRemoteConfig>
-        <name></name>
-        <refspec></refspec>
-        <url>ssh://git@wakemakin-ci.github.com/Wakemakin/wakemakin-ci.git</url>
-      </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
@@ -57,6 +52,10 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+git clone git@wakemakin-ci.github.com:Wakemakin/wakemakin-ci.git deploy_tools</command>
+    </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 if [ -d &quot;.venv&quot; ]; then
