@@ -77,13 +77,13 @@ pip install tox
 if [ ! -d &quot;/var/deploys/faro-api&quot; ]; then
   mkdir -p /var/deploys/faro-api
 fi
-fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER\
+outfile=`fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER\
     --deb-compression bzip2 --inputs MANIFEST\
     -p /var/deploys/NAME/NAME_FULLVERSION_ARCH.TYPE\
     --vendor &quot;Wakemakin Development House L.L.C&quot;\
     -d python-dev -d python-virtualenv\
     -d libmysqlclient-dev\
-    --url &quot;https://github.com/Wakemakin/faro-api&quot; --prefix /opt/faro/faro-api
+    --url &quot;https://github.com/Wakemakin/faro-api&quot; --prefix /opt/faro/faro-api`
 if [ $? -ne 0 ]; then
   echo &quot;Error creating deb&quot;
   exit 1
