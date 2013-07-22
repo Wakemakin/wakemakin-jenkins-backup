@@ -62,7 +62,7 @@ source .venv/bin/activate
 pip install -r pip-requirements.txt
 pip install -r test-requirements.txt
 pip install tox
-fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER --deb-compression bzip2 --inputs MANIFEST -p /var/deploys/NAME_FULLVERSION_ARCH.TYPE
+fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER --deb-compression bzip2 --inputs MANIFEST -p /var/deploys/NAME_FULLVERSION_ARCH.TYPE --vendor &quot;Wakemakin Development House L.L.C&quot; -d python-dev -d python-virtualenv --url &quot;https://github.com/Wakemakin/faro-api&quot; 
 if [ $? -ne 0 ]; then
   echo &quot;Error creating deb&quot;
   exit 1
