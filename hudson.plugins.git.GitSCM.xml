@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson.plugins.git.GitSCM_-DescriptorImpl plugin="git@1.4.0">
-  <generation>1</generation>
+  <generation>3</generation>
   <globalConfigName>ridley</globalConfigName>
   <globalConfigEmail>admin@wakemakin.com</globalConfigEmail>
   <createAccountBasedOnEmail>false</createAccountBasedOnEmail>
