@@ -54,6 +54,13 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
+if [ -d &quot;deploy_tools&quot; ]; then
+  rm -rf deploy_tools
+fi
+git clone git@wakemakin-ci.github.com/Wakemakin/wakemakin-ci.git deploy_tools</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
 if [ -d &quot;.venv&quot; ]; then
   rm -rf .venv
 fi
