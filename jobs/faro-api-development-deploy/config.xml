@@ -84,13 +84,15 @@ outfile=`fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER\
     -d python-dev -d python-virtualenv\
     -d libmysqlclient-dev\
     --url &quot;https://github.com/Wakemakin/faro-api&quot; --prefix /opt/faro/faro-api`
+echo &quot;Created deb: $outfile&quot;
 if [ $? -ne 0 ]; then
   echo &quot;Error creating deb&quot;
   exit 1
 fi
 if [ -e &quot;/var/deploys/faro-api/latest&quot; ]; then
   rm /var/deploys/faro-api/latest
-fi </command>
+fi
+ln -s $outfile /var/deploys/faro-api/latest</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
