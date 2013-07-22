@@ -8,7 +8,7 @@
   <login>PircBotx</login>
   <sslTrustAllCertificates>false</sslTrustAllCertificates>
   <password></password>
-  <nick>jenkins-bot</nick>
+  <nick>wakejenkins</nick>
   <nickServPassword></nickServPassword>
   <scrambledPasswords>true</scrambledPasswords>
   <defaultTargets>
