@@ -54,6 +54,13 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
+#!/bin/bash
+virtualenv --prompt=&apos;(faro-api)&apos; --distribute --no-site-packages .venv
+source .venv/bin/activate
+pip install -r pip-requirements.txt
+pip install -r test-requirements.txt
+pip install tox
+deactivate
 fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER --deb-compression bzip2 --inputs MANIFEST
 if [ $? -ne 0 ]; then
   echo &quot;Error creating deb&quot;
