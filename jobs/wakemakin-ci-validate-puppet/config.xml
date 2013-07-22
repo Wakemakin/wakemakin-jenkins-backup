@@ -62,6 +62,35 @@ find puppet/* -name &quot;*.pp&quot; -exec puppet parser validate &quot;{}&quot;
 if [ $? -ne 0 ]; then
   echo &quot;Puppet parser failed&quot;
   exit 1
+fi
+puppet-lint --with-filename --with-context puppet/modules/basic
+if [ $? -ne 0 ]; then
+  echo &quot;Puppet lint failed&quot;
+  exit 1
+fi</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+puppet-lint --with-filename --with-context puppet/modules/basic
+if [ $? -ne 0 ]; then
+  echo &quot;Puppet lint failed&quot;
+  exit 1
+fi</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+puppet-lint --with-filename --with-context puppet/modules/sudo
+if [ $? -ne 0 ]; then
+  echo &quot;Puppet lint failed&quot;
+  exit 1
+fi</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+puppet-lint --with-filename --with-context puppet/modules/ci_tools
+if [ $? -ne 0 ]; then
+  echo &quot;Puppet lint failed&quot;
+  exit 1
 fi</command>
     </hudson.tasks.Shell>
   </builders>
