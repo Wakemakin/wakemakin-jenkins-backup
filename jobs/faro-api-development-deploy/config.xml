@@ -77,7 +77,7 @@ pip install tox
 if [ ! -d &quot;/var/deploys/faro-api&quot; ]; then
   mkdir -p /var/deploys/faro-api
 fi
-outfile=`fpm -f -n faro-api -s dir -t deb -v 0.1-ARCH --iteration $BUILD_NUMBER\
+outfile=`fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER\
     --deb-compression bzip2 --inputs MANIFEST\
     -p /var/deploys/NAME/NAME_FULLVERSION_ARCH.TYPE\
     --vendor &quot;Wakemakin Development House L.L.C&quot;\
