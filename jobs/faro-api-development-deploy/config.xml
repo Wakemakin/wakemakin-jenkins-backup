@@ -83,6 +83,7 @@ outfile=`fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER\
     --vendor &quot;Wakemakin Development House L.L.C&quot;\
     -d python-dev -d python-virtualenv\
     -d libmysqlclient-dev\
+    --description &apos;RESTful api for Project faro&apos;\
     --url &quot;https://github.com/Wakemakin/faro-api&quot; --prefix /opt/faro/faro-api`
 parsed_file=`echo $outfile | sed &apos;s/[{}:&quot; ]//g&apos; | sed &apos;s/,/\n/g&apos; | awk -F&quot;=&gt;&quot; &apos;toupper($1) == &quot;PATH&quot; {print $2}&apos;`
 echo &quot;Created deb: $parsed_file&quot;
