@@ -94,6 +94,11 @@ if [ -e &quot;/var/deploys/faro-api/latest&quot; ]; then
   rm /var/deploys/faro-api/latest
 fi
 ln -s $parsed_file /var/deploys/faro-api/latest
+if [ -f &quot;${HOME}/.gpg-agent-info&quot; ]; then
+  . &quot;${HOME}/.gpg-agent-info&quot;
+  export GPG_AGENT_INFO
+  export SSH_AUTH_SOCK
+fi
 freight-add $parsed_file apt/saucy apt/raring
 if [ $? -ne 0 ]; then
   echo &quot;Error putting deb into repo&quot;
