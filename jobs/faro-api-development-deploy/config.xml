@@ -93,7 +93,17 @@ fi
 if [ -e &quot;/var/deploys/faro-api/latest&quot; ]; then
   rm /var/deploys/faro-api/latest
 fi
-ln -s $parsed_file /var/deploys/faro-api/latest</command>
+ln -s $parsed_file /var/deploys/faro-api/latest
+freight-add $parsed_file apt/saucy apt/raring
+if [ $? -ne 0 ]; then
+  echo &quot;Error putting deb into repo&quot;
+  exit 1
+fi
+freight-cache apt/saucy apt/raring
+if [ $? -ne 0 ]; then
+  echo &quot;Error caching repo&quot;
+  exit 1
+fi</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
