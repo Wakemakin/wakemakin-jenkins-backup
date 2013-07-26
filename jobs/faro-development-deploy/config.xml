@@ -72,7 +72,7 @@ if [ -z &quot;$PROJECT&quot; ]; then
   echo &quot;Project is undefined. Cannot continue&quot;
   exit 1
 fi
-if [ &quot;$PROJECT&quot; -eq &quot;unset&quot; ]; then
+if [ &quot;$PROJECT&quot; = &quot;unset&quot; ]; then
   echo &quot;Project hasn&apos;t been set. Cannot continue&quot;
   exit 1
 fi
