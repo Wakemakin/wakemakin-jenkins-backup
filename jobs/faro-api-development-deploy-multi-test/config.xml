@@ -106,6 +106,7 @@
       <command>#!/bin/bash
 export PROJECT=faro-api
 export EXT_BUILD=$REVISION
+rm -rf wakemakin-ci/puppet
 source wakemakin-ci/scripts/deploy/faro-deploy.sh</command>
     </hudson.tasks.Shell>
   </builders>
