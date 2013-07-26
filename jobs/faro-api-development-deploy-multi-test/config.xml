@@ -95,6 +95,8 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
+export PROJECT=faro-api
+export EXT_BUILD=$BUILD_NUMBER
 source wakemakin-ci/scripts/deploy/faro-deploy.sh</command>
     </hudson.tasks.Shell>
   </builders>
