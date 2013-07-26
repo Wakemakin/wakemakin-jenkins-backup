@@ -54,10 +54,13 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-if [ -d &quot;.venv&quot; ]; then
-  rm -rf .venv
+if [ ! -d &quot;/opt/faro/faro-api&quot; ]; then
+  mkdir -p /opt/faro/faro-api
 fi
-virtualenv --prompt=&apos;(faro-api)&apos; --distribute --no-site-packages .venv
+if [ -d &quot;/opt/faro/faro-api/.venv&quot; ]; then
+  rm -rf /opt/faro/faro-api/.venv
+fi
+virtualenv --prompt=&apos;(faro-api)&apos; --distribute --no-site-packages /opt/faro/faro-api/.venv
 if [ $? -ne 0 ]; then
   echo &quot;Error creating virtualenv&quot;
   exit 1
@@ -77,6 +80,8 @@ pip install tox
 if [ ! -d &quot;/var/deploys/faro-api&quot; ]; then
   mkdir -p /var/deploys/faro-api
 fi
+deactivate
+mv /opt/faro/faro-api/.venv .venv
 outfile=`fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER\
     --deb-compression bzip2 --inputs MANIFEST\
     -p /var/deploys/NAME/NAME_FULLVERSION_ARCH.TYPE\
