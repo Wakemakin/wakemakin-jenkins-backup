@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.7">
+      <projectUrl>git@github.com/Wakemakin/faro-api/</projectUrl>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.4.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <name>origin1</name>
+        <refspec></refspec>
+        <url>ssh://git@faro-api.github.com/Wakemakin/faro-api.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>**</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <disableSubmodules>false</disableSubmodules>
+    <recursiveSubmodules>false</recursiveSubmodules>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <authorOrCommitter>false</authorOrCommitter>
+    <clean>false</clean>
+    <wipeOutWorkspace>false</wipeOutWorkspace>
+    <pruneBranches>false</pruneBranches>
+    <remotePoll>false</remotePoll>
+    <ignoreNotifyCommit>false</ignoreNotifyCommit>
+    <useShallowClone>false</useShallowClone>
+    <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+    <gitTool>Default</gitTool>
+    <submoduleCfg class="list"/>
+    <relativeTargetDir></relativeTargetDir>
+    <reference></reference>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <gitConfigName></gitConfigName>
+    <gitConfigEmail></gitConfigEmail>
+    <skipTag>false</skipTag>
+    <includedRegions></includedRegions>
+    <scmName></scmName>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+if [ ! -d &quot;/opt/faro/faro-api&quot; ]; then
+  mkdir -p /opt/faro/faro-api
+fi
+if [ -d &quot;/opt/faro/faro-api/.venv&quot; ]; then
+  rm -rf /opt/faro/faro-api/.venv
+fi
+virtualenv --prompt=&apos;(faro-api)&apos; --distribute --no-site-packages /opt/faro/faro-api/.venv
+if [ $? -ne 0 ]; then
+  echo &quot;Error creating virtualenv&quot;
+  exit 1
+fi
+source /opt/faro/faro-api/.venv/bin/activate
+pip install -r pip-requirements.txt
+if [ $? -ne 0 ]; then
+  echo &quot;Error pip install pip-requirements.txt&quot;
+  exit 1
+fi
+pip install -r test-requirements.txt
+if [ $? -ne 0 ]; then
+  echo &quot;Error pip install test-requirements.txt&quot;
+  exit 1
+fi
+pip install tox
+if [ ! -d &quot;/var/deploys/faro-api&quot; ]; then
+  mkdir -p /var/deploys/faro-api
+fi
+deactivate
+mv /opt/faro/faro-api/.venv .venv
+outfile=`fpm -f -n faro-api -s dir -t deb -v 0.1 --iteration $BUILD_NUMBER\
+    --deb-compression bzip2 --inputs MANIFEST\
+    -p /var/deploys/NAME/NAME_FULLVERSION_ARCH.TYPE\
+    --vendor &quot;Wakemakin Development House L.L.C&quot;\
+    -d python-dev -d python-virtualenv\
+    -d libmysqlclient-dev\
+    --description &apos;RESTful api for Project faro&apos;\
+    --url &quot;https://github.com/Wakemakin/faro-api&quot; --prefix /opt/faro/faro-api`
+parsed_file=`echo $outfile | sed &apos;s/[{}:&quot; ]//g&apos; | sed &apos;s/,/\n/g&apos; | awk -F&quot;=&gt;&quot; &apos;toupper($1) == &quot;PATH&quot; {print $2}&apos;`
+echo &quot;Created deb: $parsed_file&quot;
+if [ $? -ne 0 ]; then
+  echo &quot;Error creating deb&quot;
+  exit 1
+fi
+if [ -e &quot;/var/deploys/faro-api/latest&quot; ]; then
+  rm /var/deploys/faro-api/latest
+fi
+ln -s $parsed_file /var/deploys/faro-api/latest
+if [ -f &quot;${HOME}/.gpg-agent-info&quot; ]; then
+  . &quot;${HOME}/.gpg-agent-info&quot;
+  export GPG_AGENT_INFO
+  export SSH_AUTH_SOCK
+fi
+freight-add $parsed_file apt/saucy apt/raring
+if [ $? -ne 0 ]; then
+  echo &quot;Error putting deb into repo&quot;
+  exit 1
+fi
+freight-cache apt/saucy apt/raring
+if [ $? -ne 0 ]; then
+  echo &quot;Error caching repo&quot;
+  exit 1
+fi
+rm -rf .venv</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.ircbot.IrcPublisher plugin="ircbot@2.23">
+      <targets>
+        <hudson.plugins.im.GroupChatIMMessageTarget plugin="instant-messaging@1.25">
+          <name>#wakemakin</name>
+          <notificationOnly>false</notificationOnly>
+        </hudson.plugins.im.GroupChatIMMessageTarget>
+      </targets>
+      <strategy>STATECHANGE_ONLY</strategy>
+      <notifyOnBuildStart>false</notifyOnBuildStart>
+      <notifySuspects>false</notifySuspects>
+      <notifyCulprits>false</notifyCulprits>
+      <notifyFixers>false</notifyFixers>
+      <notifyUpstreamCommitters>false</notifyUpstreamCommitters>
+      <buildToChatNotifier class="hudson.plugins.im.build_notify.DefaultBuildToChatNotifier" plugin="instant-messaging@1.25"/>
+      <matrixMultiplier>ONLY_CONFIGURATIONS</matrixMultiplier>
+    </hudson.plugins.ircbot.IrcPublisher>
+  </publishers>
+  <buildWrappers/>
+</project>
