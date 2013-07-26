@@ -65,7 +65,7 @@ if [ $? -ne 0 ]; then
   echo &quot;Error creating virtualenv&quot;
   exit 1
 fi
-source .venv/bin/activate
+source /opt/faro/faro-api/.venv/bin/activate
 pip install -r pip-requirements.txt
 if [ $? -ne 0 ]; then
   echo &quot;Error pip install pip-requirements.txt&quot;
@@ -114,7 +114,8 @@ freight-cache apt/saucy apt/raring
 if [ $? -ne 0 ]; then
   echo &quot;Error caching repo&quot;
   exit 1
-fi</command>
+fi
+rm .venv</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
