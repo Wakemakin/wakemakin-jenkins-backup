@@ -93,11 +93,10 @@
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
           <configs>
             <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-              <properties>PROJECT=faro_api
-EXT_BUILD=$BUILD_NUMBER</properties>
+              <properties>REVISION=$BUILD_NUMBER</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
-          <projects>faro-development-deploy, </projects>
+          <projects>faro-api-development-deploy-multi-test, </projects>
           <condition>UNSTABLE_OR_BETTER</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
