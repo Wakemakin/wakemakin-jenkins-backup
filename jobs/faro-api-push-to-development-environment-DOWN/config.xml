@@ -68,9 +68,6 @@ DB_RESET1=`git log -1 --pretty=%B | grep DB_CHANGES | wc -l`
 DB_RESET2=`git log -2 --pretty=%B | grep DB_CHANGES | wc -l`
 git log -1
 git log -2
-echo $DB_RESET1
-echo $DB_RESET2
-exit 0
 if [ $DB_RESET1 != &quot;0&quot; ] || [ $DB_RESET2 != &quot;0&quot; ] || [ $DATABASE_WIPE -eq 1 ]; then
   echo &quot;Resetting the database&quot;
   ssh api.jibely.com supervisorctl stop faro_api
@@ -84,6 +81,24 @@ if [ $response -ne 200 ]; then
 fi</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <hudson.plugins.ircbot.IrcPublisher plugin="ircbot@2.23">
+      <targets>
+        <hudson.plugins.im.GroupChatIMMessageTarget plugin="instant-messaging@1.25">
+          <name>#wakemakin</name>
+          <notificationOnly>false</notificationOnly>
+        </hudson.plugins.im.GroupChatIMMessageTarget>
+      </targets>
+      <strategy>ALL</strategy>
+      <notifyOnBuildStart>true</notifyOnBuildStart>
+      <notifySuspects>false</notifySuspects>
+      <notifyCulprits>false</notifyCulprits>
+      <notifyFixers>false</notifyFixers>
+      <notifyUpstreamCommitters>false</notifyUpstreamCommitters>
+      <buildToChatNotifier class="hudson.plugins.im.build_notify.DefaultBuildToChatNotifier" plugin="instant-messaging@1.25"/>
+      <matrixMultiplier>ONLY_CONFIGURATIONS</matrixMultiplier>
+      <channels/>
+    </hudson.plugins.ircbot.IrcPublisher>
+  </publishers>
   <buildWrappers/>
 </project>
