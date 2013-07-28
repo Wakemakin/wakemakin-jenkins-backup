@@ -65,6 +65,7 @@
       <command>#!/bin/bash
 ssh api.jibely.com /root/wakemakin-ci/puppet/sync_config.sh
 DB_RESET=`git log -1 --pretty=%B | grep DB_CHANGES | wc -l`
+git log -1
 echo $DB_RESET
 exit 0
 if [ $DB_RESET != &quot;0&quot; ] || [ $DATABASE_WIPE -eq 1 ]; then
