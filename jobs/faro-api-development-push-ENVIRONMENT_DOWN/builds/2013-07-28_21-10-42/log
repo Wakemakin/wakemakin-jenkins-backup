@@ -1,0 +1,37 @@
+Started by user [8mha:AAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAy+EgZu/dLi1CL9ovzE1BIAMCLkW8AAAAA=[0mJustin Hammond
+Building in workspace /var/lib/jenkins/workspace/faro-api-push-to-development-environment-DOWN
+Checkout:faro-api-push-to-development-environment-DOWN / /var/lib/jenkins/workspace/faro-api-push-to-development-environment-DOWN - hudson.remoting.LocalChannel@261c8ea3
+Using strategy: Default
+Last Built Revision: Revision 330e1c275709fc45d672723bf82128254adb1776 (origin/development)
+Fetching changes from 1 remote Git repository
+Fetching upstream changes from origin
+Commencing build of Revision 330e1c275709fc45d672723bf82128254adb1776 (origin/development)
+Checking out Revision 330e1c275709fc45d672723bf82128254adb1776 (origin/development)
+[faro-api-push-to-development-environment-DOWN] $ /bin/bash /tmp/hudson8892218523691736112.sh
+[0;36mnotice: /Stage[main]/Wsgi_tools/Exec[apt-update]/returns: executed successfully[0m
+[0;36mnotice: Finished catalog run in 7.13 seconds[0m
+commit 330e1c275709fc45d672723bf82128254adb1776
+Merge: e0dfd62 b73b6ad
+Author: Justin Hammond <runningempty@gmail.com>
+Date:   Sun Jul 28 14:00:34 2013 -0700
+
+    Merge pull request #32 from Wakemakin/model_work_pre_alpha
+    
+    Model work pre alpha
+commit 330e1c275709fc45d672723bf82128254adb1776
+Merge: e0dfd62 b73b6ad
+Author: Justin Hammond <runningempty@gmail.com>
+Date:   Sun Jul 28 14:00:34 2013 -0700
+
+    Merge pull request #32 from Wakemakin/model_work_pre_alpha
+    
+    Model work pre alpha
+
+commit b73b6ad2b4b35a1486632f61f2931c9a7cb1046d
+Author: Justin Hammond <justin.hammond@rackspace.com>
+Date:   Sun Jul 28 21:00:17 2013 +0000
+
+    DB_CHANGES: Testing db reloader
+0
+1
+Finished: SUCCESS

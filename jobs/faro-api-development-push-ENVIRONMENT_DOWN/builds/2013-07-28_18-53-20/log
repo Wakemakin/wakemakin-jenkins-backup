@@ -1,0 +1,30 @@
+Started by upstream project "[8mha:AAAAth+LCAAAAAAAAP9djTEOgkAQRUeMHsDS2NhYidvZGCobTdDGE6wywuKws1kGItfwGtp4CI/jHSShkt/8X7y8//rCqPQwz6qkZLu6sC2ZcHXgBGnXOPRk7O3IgtBlEADcPcx6/B+6jp7v6OE+AQR7GBPaVLIYhpUngUmc61or0jZVJ/HGpptWN+3ptl33f107FgJLlfNZXbXnUDsTJlgjsSvQSrsdcRMWFYkJBUtRP6Wf6UPhAAAA[0mfaro-api-development-deploy-multi-test" build number [8mha:AAAAuB+LCAAAAAAAAP9djTEOgkAQRUeMHsDS2HgA2BgTG0NlownaeIJVRlgcdjbLQOQaXkMbD+FxvIMkVvKb/4uX958fGFUe5nmdVmyjM9uKCaM9p0jb1qEnY68HFoRfBgHAzcOsx/+hq/jxiu/uHUCwgzGhzSRPYFh7EpgkhW60Im0zdRRvbLbudNOebvPr/q/rRiAQqYJP6qI9h9qZMMUGiV2JVrrtiNuwrElMKFiJWiy/vO5oeOMAAAA=[0m13
+originally caused by:
+ Started by upstream project "[8mha:AAAAsR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz5EgZV/az8JP20xKJ83cSCTN2U1LLUnPyC3NS8Et3SvMwS3ZLU4pJifQDaJGio2gAAAA==[0mfaro-api-development-unit-tests" build number [8mha:AAAAsx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAymEgZ1/az8JP20xKJ83cSCTN2U1LLUnPyC3NS8Et3SvMwS3ZLU4pJifVMzAEjqRpHcAAAA[0m56
+ originally caused by:
+  Started by user [8mha:AAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAy+EgZu/dLi1CL9ovzE1BIAMCLkW8AAAAA=[0mJustin Hammond
+Building in workspace /var/lib/jenkins/workspace/faro-api-development-push
+Checkout:faro-api-development-push / /var/lib/jenkins/workspace/faro-api-development-push - hudson.remoting.LocalChannel@261c8ea3
+Using strategy: Default
+Cloning the remote Git repository
+Cloning repository ssh://git@faro-api.github.com/Wakemakin/faro-api.git
+git --version
+git version 1.8.1.2
+Fetching upstream changes from origin
+Seen branch in repository origin/HEAD
+Seen branch in repository origin/development
+Seen branch in repository origin/master
+Seen branch in repository origin/model_work_pre_alpha
+Seen 4 remote branches
+Commencing build of Revision e0dfd6272c6f13098e3b674dbe146ae780ca1bdb (origin/development)
+Checking out Revision e0dfd6272c6f13098e3b674dbe146ae780ca1bdb (origin/development)
+No change to record in branch origin/development
+[faro-api-development-push] $ /bin/bash /tmp/hudson1060845179416844308.sh
+[0;36mnotice: /Stage[main]/Wsgi_tools/Exec[apt-update]/returns: executed successfully[0m
+[0;36mnotice: /Stage[main]/Faro_api/Package[faro-api]/ensure: ensure changed '0.1-55' to '0.1-56'[0m
+[0;36mnotice: /Stage[main]/Faro_api/Exec[faro_api_kill]: Triggered 'refresh' from 1 events[0m
+[0;36mnotice: /Stage[main]/Faro_api/Exec[faro_api_restart]: Triggered 'refresh' from 1 events[0m
+[0;36mnotice: /Stage[main]/Faro_api/Mysql::Db[faro_api]/Database[faro_api]/charset: charset changed 'latin1' to 'utf8'[0m
+[0;36mnotice: Finished catalog run in 18.68 seconds[0m
+IRC notifier plugin: Sending notification to: #wakemakin
+Finished: SUCCESS
