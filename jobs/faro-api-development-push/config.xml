@@ -27,7 +27,7 @@
 ssh api.jibely.com /root/wakemakin-ci/puppet/sync_config.sh
 if [ $DATABASE_WIPE -eq 1 ]; then
   ssh api.jibely.com supervisorctl stop faro_api
-  ssh api.jibely.com mysql -u root --password=password -e &apos;drop database faro_api; create database faro_api;&quot;
+  ssh api.jibely.com mysql -u root --password=password -e &apos;drop database faro_api; create database faro_api;&apos;
   ssh api.jibely.com supervisorctl start faro_api
 fi
 response=$(curl --write-out %{http_code} --silent --output /dev/null &apos;http://api.jibely.com/users&apos;)
