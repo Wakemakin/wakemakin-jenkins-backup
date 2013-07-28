@@ -1,15 +1,42 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
+  <actions/>
+  <description></description>
   <keepDependencies>false</keepDependencies>
-  <properties/>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.TextParameterDefinition>
+          <name>DATABASE_WIPE</name>
+          <description>If set to 1 it will wipe the database</description>
+          <defaultValue>0</defaultValue>
+        </hudson.model.TextParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
   <scm class="hudson.scm.NullSCM"/>
-  <canRoam>false</canRoam>
+  <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
-  <builders/>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+ssh api.jibely.com /root/wakemakin-ci/puppet/sync_config.sh
+if [ $DATABASE_WIPE -eq 1 ]; then
+  ssh api.jibely.com supervisorctl stop faro_api
+  ssh api.jibely.com mysql -u root --password=password -e &apos;drop database faro_api; create database faro_api;&quot;
+  ssh api.jibely.com supervisorctl start faro_api
+fi
+response=$(curl --write-out %{http_code} --silent --output /dev/null &apos;http://api.jibely.com/users&apos;)
+if [ $response -ne 200 ]; then
+  echo &quot;Server failed to respond&quot;
+  exit 1
+fi</command>
+    </hudson.tasks.Shell>
+  </builders>
   <publishers/>
   <buildWrappers/>
 </project>
