@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description></description>
+  <description>Redeploying newest code to development environment</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.7">
@@ -85,7 +85,7 @@ fi</command>
         </hudson.plugins.im.GroupChatIMMessageTarget>
       </targets>
       <strategy>ALL</strategy>
-      <notifyOnBuildStart>false</notifyOnBuildStart>
+      <notifyOnBuildStart>true</notifyOnBuildStart>
       <notifySuspects>false</notifySuspects>
       <notifyCulprits>false</notifyCulprits>
       <notifyFixers>false</notifyFixers>
