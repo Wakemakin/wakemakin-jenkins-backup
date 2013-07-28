@@ -136,7 +136,7 @@ source wakemakin-ci/scripts/deploy/faro-deploy.sh</command>
               <properties>DATABASE_WIPE=0</properties>
             </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
           </configs>
-          <projects>faro-api-push-to-development-environment-DOWN, </projects>
+          <projects>faro-api-development-push-ENVIRONMENT_DOWN, </projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>

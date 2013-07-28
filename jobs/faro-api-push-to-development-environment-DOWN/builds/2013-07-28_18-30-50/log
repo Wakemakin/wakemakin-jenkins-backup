@@ -1,9 +1,0 @@
-Started by user [8mha:AAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAy+EgZu/dLi1CL9ovzE1BIAMCLkW8AAAAA=[0mJustin Hammond
-Building in workspace /var/lib/jenkins/workspace/faro-api-development-push
-[faro-api-development-push] $ /bin/bash /tmp/hudson5700441193055414026.sh
-[0;36mnotice: /Stage[main]/Wsgi_tools/Exec[apt-update]/returns: executed successfully[0m
-[0;36mnotice: Finished catalog run in 6.98 seconds[0m
-/tmp/hudson5700441193055414026.sh: line 8: unexpected EOF while looking for matching `''
-/tmp/hudson5700441193055414026.sh: line 13: syntax error: unexpected end of file
-Build step 'Execute shell' marked build as failure
-Finished: FAILURE

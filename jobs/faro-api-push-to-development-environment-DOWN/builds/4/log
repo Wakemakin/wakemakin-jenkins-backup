@@ -1,8 +1,0 @@
-Started by user [8mha:AAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAy+EgZu/dLi1CL9ovzE1BIAMCLkW8AAAAA=[0mJustin Hammond
-Building in workspace /var/lib/jenkins/workspace/faro-api-development-push
-[faro-api-development-push] $ /bin/bash /tmp/hudson8986423210699490566.sh
-[0;36mnotice: /Stage[main]/Wsgi_tools/Exec[apt-update]/returns: executed successfully[0m
-[0;36mnotice: Finished catalog run in 6.94 seconds[0m
-faro_api: stopped
-faro_api: started
-Finished: SUCCESS
