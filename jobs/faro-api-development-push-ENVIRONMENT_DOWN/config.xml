@@ -64,16 +64,19 @@
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 ssh api.jibely.com /root/wakemakin-ci/puppet/sync_config.sh
+
 DB_RESET1=`git log -1 --pretty=%B | grep DB_CHANGES | wc -l`
 DB_RESET2=`git log -2 --pretty=%B | grep DB_CHANGES | wc -l`
 git log -1
 git log -2
+
 if [ $DB_RESET1 != &quot;0&quot; ] || [ $DB_RESET2 != &quot;0&quot; ] || [ $DATABASE_WIPE -eq 1 ]; then
   echo &quot;Resetting the database&quot;
   ssh api.jibely.com supervisorctl stop faro_api
   ssh api.jibely.com &quot;mysql -u root --password=password -e &apos;drop database faro_api; create database faro_api;&apos;&quot;
   ssh api.jibely.com supervisorctl start faro_api
 fi
+
 function try_server() {
   response=$(curl --write-out %{http_code} --silent --output /dev/null &apos;http://api.jibely.com/users&apos;)
   if [ $response -ne 200 ]; then
@@ -81,7 +84,7 @@ function try_server() {
   fi
   echo 0
 }
-response=$(curl --write-out %{http_code} --silent --output /dev/null &apos;http://api.jibely.com/users&apos;)
+
 NEXT_WAIT_TIME=0
 until try_server || [ $NEXT_WAIT_TIME -eq 5 ]; do
    sleep $(( NEXT_WAIT_TIME++ ))
