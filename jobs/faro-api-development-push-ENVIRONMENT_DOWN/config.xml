@@ -14,6 +14,11 @@
           <description>If set to 1 it will wipe the database</description>
           <defaultValue>0</defaultValue>
         </hudson.model.TextParameterDefinition>
+        <hudson.model.TextParameterDefinition>
+          <name>REVISION</name>
+          <description>The revision to check for after deployment</description>
+          <defaultValue>0</defaultValue>
+        </hudson.model.TextParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -74,18 +79,12 @@ if [ $DB_RESET1 != &quot;0&quot; ] || [ $DB_RESET2 != &quot;0&quot; ] || [ $DATA
   ssh api.jibely.com /root/wakemakin-ci/scripts/deploy/faro-api-db-reset.sh
 fi
 
-function try_server() {
-  response=$(curl --write-out %{http_code} --silent --output /dev/null &apos;http://api.jibely.com/users&apos;)
-  if [ $response -ne 200 ]; then
-    echo 1
-  fi
-  echo 0
-}
-
-NEXT_WAIT_TIME=0
-until try_server || [ $NEXT_WAIT_TIME -eq 5 ]; do
-   sleep $(( NEXT_WAIT_TIME++ ))
-done</command>
+R=`ssh api.jibely.com /root/wakemakin-ci/scripts/deploy/release-checker.sh $REVISION &quot;http://api.jibely.com/release&quot;`
+if [ $R -ne 0 ]; then
+  echo &quot;Release failed to respond in time.&quot;
+  exit 1
+fi
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
