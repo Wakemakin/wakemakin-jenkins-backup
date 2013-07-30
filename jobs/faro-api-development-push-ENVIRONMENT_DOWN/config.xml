@@ -71,10 +71,7 @@ git log -1
 git log -2
 
 if [ $DB_RESET1 != &quot;0&quot; ] || [ $DB_RESET2 != &quot;0&quot; ] || [ $DATABASE_WIPE -eq 1 ]; then
-  echo &quot;Resetting the database&quot;
-  ssh api.jibely.com supervisorctl stop faro_api
-  ssh api.jibely.com &quot;mysql -u root --password=password -e &apos;drop database faro_api; create database faro_api;&apos;&quot;
-  ssh api.jibely.com supervisorctl start faro_api
+  ssh api.jibely.com /root/wakemakin-ci/scripts/deploy/faro-api-db-reset.sh
 fi
 
 function try_server() {
