@@ -80,6 +80,7 @@ if [ $DB_RESET1 != &quot;0&quot; ] || [ $DB_RESET2 != &quot;0&quot; ] || [ $DATA
 fi
 
 R=`ssh api.jibely.com /root/wakemakin-ci/scripts/deploy/release-checker.sh $REVISION &quot;http://api.jibely.com/release&quot;`
+echo $R
 if [ &quot;$R&quot; != &quot;0&quot; ]; then
   echo &quot;Release failed to respond in time.&quot;
   exit 1
