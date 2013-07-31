@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <matrix-project>
   <actions/>
-  <description>Will clone the current api and run unit tests.</description>
+  <description>Will clone the current common library and run unit tests.</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.7">
-      <projectUrl>git@github.com/Wakemakin/faro-api/</projectUrl>
+      <projectUrl>git@github.com/Wakemakin/faro-common/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@1.4.0">
@@ -14,7 +14,7 @@
       <hudson.plugins.git.UserRemoteConfig>
         <name></name>
         <refspec></refspec>
-        <url>ssh://git@faro-api.github.com/Wakemakin/faro-api.git</url>
+        <url>https://github.com/Wakemakin/faro-common.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -85,16 +85,13 @@
       <notifyUpstreamCommitters>false</notifyUpstreamCommitters>
       <buildToChatNotifier class="hudson.plugins.im.build_notify.PrintFailingTestsBuildToChatNotifier" plugin="instant-messaging@1.25"/>
       <matrixMultiplier>ONLY_CONFIGURATIONS</matrixMultiplier>
+      <channels/>
     </hudson.plugins.ircbot.IrcPublisher>
     <com.cloudbees.jenkins.GitHubCommitNotifier plugin="github@1.7"/>
     <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.18">
       <configs>
         <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-          <configs>
-            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-              <properties>REVISION=$BUILD_NUMBER</properties>
-            </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
-          </configs>
+          <configs class="empty-list"/>
           <projects>faro-api-development-deploy-multi-test, </projects>
           <condition>UNSTABLE_OR_BETTER</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
